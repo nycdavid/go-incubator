@@ -8,12 +8,18 @@ import (
 )
 
 type MyType struct {
+	Id   string
+	Name string
+}
+
+func (mt *MyType) Foob() {
+	fmt.Println("Called foob")
 }
 
 func main() {
 	e := echo.New()
 	e.Group("/admin")
-	mt := MyType{}
+	mt := &MyType{}
 	vof := reflect.ValueOf(mt)
-	fmt.Println(vof.Type())
+	vof.MethodByName("Foob").Call([]reflect.Value{})
 }
