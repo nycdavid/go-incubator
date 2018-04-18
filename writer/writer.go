@@ -1,10 +1,11 @@
 package writer
 
 import (
-	"bytes"
-
-	"github.com/go-redis/redis"
+	"io"
 )
 
-type RedisWriter struct {
+func RW(rw io.ReadWriter) {
+	foo := []byte{}
+	rw.Read(foo)
+	rw.Write(foo)
 }
