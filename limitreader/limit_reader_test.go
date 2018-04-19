@@ -16,9 +16,10 @@ func TestLimitReader(t *testing.T) {
 	expected := 4
 	data := make([]byte, 6)
 	got, err := rdr.Read(data)
+	expectedStr := string(data[:4])
 
-	if string(data) != "Lore" {
-		errMsg := fmt.Sprintf("Expected string to be %s, got %s", "Lore", string(data))
+	if expectedStr != "Lore" {
+		errMsg := fmt.Sprintf("Expected string to be \"%s\", got \"%s\"", "Lore", string(data))
 		t.Error(errMsg)
 	}
 

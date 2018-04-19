@@ -5,6 +5,6 @@ echo-session:
 writer:
 	go run main.writer.go
 limitreader:
-	go test ./limitreader
+	go test -v ./limitreader
 
 .PHONY: limitreader
