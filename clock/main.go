@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"net"
+	"os"
 	"time"
 )
 
@@ -13,21 +14,28 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	tzS := os.Getenv("TZ")
+	fmt.Println(tzS)
+	tz, err := time.LoadLocation(tzS)
+	if err != nil {
+		log.Fatal(err)
+	}
 	for {
 		conn, err := listener.Accept()
-		fmt.Println("Me oh my")
 		if err != nil {
 			log.Print(err)
 			continue // breaks execution
 		}
-		go handleConn(conn)
+		go handleConn(conn, tz)
 	}
 }
 
-func handleConn(c net.Conn) {
+func handleConn(c net.Conn, loc *time.Location) {
 	defer c.Close()
 	for {
-		_, err := io.WriteString(c, time.Now().Format("15:04:05\n"))
+		t := time.Now()
+		t2 := t.In(loc)
+		_, err := io.WriteString(c, t2.Format("15:04:05\n"))
 		if err != nil {
 			return
 		}

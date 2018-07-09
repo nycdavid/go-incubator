@@ -10,7 +10,8 @@ limitreader:
 run:
 	docker run \
 	-it \
-	-P \
+	-e TZ=${TZ} \
+	-p 8000:8000 \
 	-v $(shell pwd)/${PACKAGE}/:/go/src/app \
 	--rm \
 	golang:1.10-alpine \
