@@ -10,12 +10,11 @@ limitreader:
 run:
 	docker run \
 	-it \
-	-e TZ=${TZ} \
 	-p 8000:8000 \
-	-v $(shell pwd)/${PACKAGE}/:/go/src/app \
+	-v $(shell pwd)/:/go/src/github.com/nycdavid/go-incubator \
 	--rm \
 	golang:1.10-alpine \
-	go run src/app/main.go ${ARG}
+	go run src/github.com/nycdavid/go-incubator/${PACKAGE}/main.go ${ARG}
 
 test:
 	docker run \

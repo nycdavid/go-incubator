@@ -1,33 +1,16 @@
 package main
 
 import (
-	"fmt"
 	"io"
-	"log"
 	"net"
 	"os"
 	"time"
+
+	"github.com/nycdavid/go-incubator/connhandler"
 )
 
 func main() {
-	listener, err := net.Listen("tcp", "0.0.0.0:8000")
-	if err != nil {
-		log.Fatal(err)
-	}
-	tzS := os.Getenv("TZ")
-	fmt.Println(tzS)
-	tz, err := time.LoadLocation(tzS)
-	if err != nil {
-		log.Fatal(err)
-	}
-	for {
-		conn, err := listener.Accept()
-		if err != nil {
-			log.Print(err)
-			continue // breaks execution
-		}
-		go handleConn(conn, tz)
-	}
+	connhandler.Listen("0.0.0.0:8000", handleConn)
 }
 
 func handleConn(c net.Conn, loc *time.Location) {
