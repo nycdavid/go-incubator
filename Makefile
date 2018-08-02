@@ -15,8 +15,8 @@ run:
 	-p 8000:8000 \
 	-v $(shell pwd)/:/go/src/github.com/nycdavid/go-incubator \
 	--rm \
-	golang:1.10-alpine \
-	go run src/github.com/nycdavid/go-incubator/${PACKAGE}/main.go ${ARG}
+	nycdavid/go-incubator:latest \
+	go run /go/src/github.com/nycdavid/go-incubator/${PACKAGE}/main.go ${ARG}
 
 test:
 	docker run \
