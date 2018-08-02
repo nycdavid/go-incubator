@@ -1,3 +1,5 @@
+image:
+	docker build -t nycdavid/go-incubator:latest .
 csv:
 	go run main.csv.go
 echo-session:
