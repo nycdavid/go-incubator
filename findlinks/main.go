@@ -16,6 +16,9 @@ func main() {
 
 	for list := range worklist {
 		for _, link := range list {
+			if len(seen) >= 3 {
+				break
+			}
 			if !seen[link] {
 				seen[link] = true
 				go func(link string) {
